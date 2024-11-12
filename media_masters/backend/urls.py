@@ -17,7 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('handle_player_decision', views.handle_player_decision, name='handle_player_decision'),
+    # Agrega más URLs según sea necesario
 ]
