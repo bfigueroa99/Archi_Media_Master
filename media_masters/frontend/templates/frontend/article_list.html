@@ -1,0 +1,34 @@
+<!-- frontend/templates/frontend/article_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article List</title>
+    <script>
+        function generateContent(articleId) {
+            fetch(`/generate_content/${articleId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.generated_content) {
+                        document.getElementById(`generated-content-${articleId}`).innerText = data.generated_content;
+                    } else {
+                        alert('Failed to generate content');
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Article List</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.content }}</p>
+                <p><em>Published on: {{ article.published_date }}</em></p>
+                <button onclick="generateContent({{ article.id }})">Generate Content</button>
+                <p id="generated-content-{{ article.id }}"></p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

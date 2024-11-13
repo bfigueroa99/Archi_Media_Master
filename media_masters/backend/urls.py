@@ -16,11 +16,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('handle_player_decision', views.handle_player_decision, name='handle_player_decision'),
-    # Agrega más URLs según sea necesario
+    path('', include('frontend.urls')),
+    path('articles/', views.article_list, name='article_list'),
+    path('generate_content/<int:article_id>/', views.generate_article_content, name='generate_article_content'),
 ]

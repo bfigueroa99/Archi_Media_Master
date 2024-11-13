@@ -1,12 +1,12 @@
 from nltk.sentiment import SentimentIntensityAnalyzer
+from transformers import pipeline
 
 sia = SentimentIntensityAnalyzer()
 
-def generate_feedback(title, content):
-    # Subscribe to the article content received from the Backend
-    sentiment_score = sia.polarity_scores(content)['compound']
-    
-    if sentiment_score > 0:
-        return f'The article "{title}" appears to be true based on the positive sentiment.'
-    else:
-        return f'The article "{title}" appears to be false based on the negative sentiment.'
+# Cargar el modelo de generación de texto
+generator = pipeline('text-generation', model='gpt2')
+
+def generate_content(title, content):
+    prompt = f"Title: {title}\nContent: {content}\nGenerated Content:"
+    generated = generator(prompt, max_length=200, num_return_sequences=1)
+    return generated[0]['generated_text']

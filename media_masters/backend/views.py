@@ -1,6 +1,8 @@
 from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 from .models import NewsArticle
 import requests
+from ai_service_content.ai_service import generate_content
 
 def handle_player_decision(request):
     if request.method == 'POST':
@@ -33,3 +35,15 @@ def generate_article_feedback(article_id):
         return feedback
     else:
         return 'Error generating feedback'
+
+def article_list(request):
+    articles = NewsArticle.objects.all()
+    return render(request, 'frontend/article_list.html', {'articles': articles})
+
+def generate_article_content(request, article_id):
+    article = get_object_or_404(NewsArticle, id=article_id)
+    generated_content = generate_content(article.title, article.content)
+    if generated_content:
+        return JsonResponse({'generated_content': generated_content})
+    else:
+        return JsonResponse({'error': 'Failed to generate content'}, status=500)
