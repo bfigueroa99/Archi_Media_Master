@@ -3,7 +3,6 @@ from transformers import pipeline
 
 sia = SentimentIntensityAnalyzer()
 
-# Cargar el modelo de generación de texto
 generator = pipeline('text-generation', model='gpt2')
 
 def generate_content(title, content):
