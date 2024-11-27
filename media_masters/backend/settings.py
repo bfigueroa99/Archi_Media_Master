@@ -36,10 +36,10 @@ if config('DATABASE_URL', default=None):
     DATABASES['default'] = dj_database_url.config(default=config('DATABASE_URL'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-rqy*(yw(cs0_o_ydymwhi)&dko7b5@6&+ep9_3e#7l-4umlgjp"
+SECRET_KEY = config('SECRET_KEY', default="django-insecure-rqy*(yw(cs0_o_ydymwhi)&dko7b5@6&+ep9_3e#7l-4umlgjp")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
