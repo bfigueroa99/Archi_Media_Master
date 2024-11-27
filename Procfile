@@ -1,1 +1,1 @@
-web: gunicorn media_masters.wsgi
+web: gunicorn archi-media_masters.wsgi
