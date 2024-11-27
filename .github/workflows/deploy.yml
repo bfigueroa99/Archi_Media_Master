@@ -1,0 +1,38 @@
+# .github/workflows/deploy.yml
+name: Deploy to Heroku
+
+on:
+  workflow_run:
+    workflows: ["Backend CI", "Frontend CI"]
+    types:
+      - completed
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Login to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo "machine api.heroku.com" > ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "machine git.heroku.com" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+      
+      - name: Deploy Backend to Heroku
+        run: |
+          git remote add heroku-backend https://git.heroku.com/<your-backend-app-name>.git
+          git push heroku-backend main
+
+      - name: Deploy Frontend to Heroku
+        run: |
+          git remote add heroku-frontend https://git.heroku.com/<your-frontend-app-name>.git
+          git push heroku-frontend main
