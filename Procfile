@@ -1,1 +1,1 @@
-web: gunicorn archi-media-master.wsgi --log-file -
+web: gunicorn archi-media-master.wsgi
