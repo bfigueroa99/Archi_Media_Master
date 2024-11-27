@@ -1,2 +1,2 @@
-web: gunicorn media_master.wsgi:application
+cd media_master && python manage.py runserver
 
