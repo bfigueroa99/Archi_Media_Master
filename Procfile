@@ -1,1 +1,1 @@
-web: cd media_masters && gunicorn archi-media-masters.wsgi
+web: cd Archi_Media_Master/media_masters && gunicorn backend.wsgi
