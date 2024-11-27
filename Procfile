@@ -1,2 +1,2 @@
-cd media_master && python manage.py runserver
+web: cd media_master && python manage.py runserver
 
