@@ -1,1 +1,1 @@
-web: gunicorn archi-media-master.wsgi
+web: cd media_master && python manage.py runserver
