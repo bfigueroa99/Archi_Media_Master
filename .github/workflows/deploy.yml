@@ -3,9 +3,9 @@ name: Deploy to Heroku
 
 on:
   workflow_run:
-    # workflows: ["Backend CI", "Frontend CI"]
-    # types:
-    #   - completed
+    workflows: ["Backend CI", "Frontend CI"]
+    types:
+      - completed
     branches: [master]
 
 jobs:
