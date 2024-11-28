@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -39,7 +40,7 @@ if config('DATABASE_URL', default=None):
 SECRET_KEY = config('SECRET_KEY', default="django-insecure-rqy*(yw(cs0_o_ydymwhi)&dko7b5@6&+ep9_3e#7l-4umlgjp")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
