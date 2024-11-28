@@ -26,14 +26,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to Docker Hub
         env:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-        run: echo $DOCKER_HUB_TOKEN | docker login -u your-docker-username --password-stdin
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u your-docker-username --password-stdin
 
       - name: Build and push Docker image
         run: |
-          docker build -t your-docker-username/myapp:latest ./app
+          docker build -t your-docker-username/myapp:latest .
           docker push your-docker-username/myapp:latest
