@@ -3,12 +3,9 @@ name: Backend and Frontend CI
 on:
   push:
     branches: [ master ]
-    paths:
-      - 'media_master/**'
   pull_request:
     branches: [ master ]
-    paths:
-      - 'media_master/**'
+
 
 jobs:
   test:
