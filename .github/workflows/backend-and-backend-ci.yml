@@ -1,13 +1,12 @@
-# .github/workflows/backend-ci.yml
-name: Backend CI
+name: Backend and Frontend CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
     paths:
       - 'backend/**'
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
     paths:
       - 'backend/**'
 
