@@ -30,6 +30,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          cd backend
+          cd media_masters
           docker build -t myapp:latest .
           docker push myapp:latest
