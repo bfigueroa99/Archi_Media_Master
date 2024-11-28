@@ -15,9 +15,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Set up Heroku remote
-        run: git remote add heroku https://git.heroku.com/archi-media-master.git
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
