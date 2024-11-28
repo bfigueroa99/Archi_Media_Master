@@ -3,10 +3,10 @@ name: Deploy to Heroku
 
 on:
   workflow_run:
-    workflows: ["Backend CI", "Frontend CI"]
-    types:
-      - completed
-    branches: [main]
+    # workflows: ["Backend CI", "Frontend CI"]
+    # types:
+    #   - completed
+    branches: [master]
 
 jobs:
   deploy:
@@ -27,12 +27,7 @@ jobs:
           echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
           echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
       
-      - name: Deploy Backend to Heroku
+      - name: Deploy to Heroku
         run: |
-          git remote add heroku-backend https://git.heroku.com/<your-backend-app-name>.git
-          git push heroku-backend main
-
-      - name: Deploy Frontend to Heroku
-        run: |
-          git remote add heroku-frontend https://git.heroku.com/<your-frontend-app-name>.git
-          git push heroku-frontend main
+          git remote add heroku-backend https://git.heroku.com/archi-media-master.git
+          git push heroku-backend master
