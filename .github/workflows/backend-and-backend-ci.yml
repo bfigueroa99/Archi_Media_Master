@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           
-  build-and-push:
+  build:
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -32,14 +32,18 @@ jobs:
         run: |
           docker build -t myapp:latest .
   
-  docker-run:
-    needs: build-and-push
+  push:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Run Docker container
+      - name: Push Docker image
         run: |
-          docker run -d -p 5000:5000 myapp:latest
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push myapp:latest
+  
+
+
